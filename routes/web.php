@@ -1,29 +1,25 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ListingController; // Add this line
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\OwnerController;
+use Illuminate\Support\Facades\Route;
 
+// Welcome page
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Dashboard (for authenticated users)
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Profile routes
+// Profile routes (for authenticated users)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-// Listing routes (protected by 'auth' and 'isOwner' middleware)
-Route::middleware(['auth', 'isOwner'])->group(function () {
-    Route::get('/owner/dashboard', [OwnerController::class, 'index'])->name('owner.dashboard');
-    Route::resource('listings', ListingController::class);
 });
 
 // Owner routes (protected by 'auth' and 'isOwner' middleware)
@@ -39,4 +35,5 @@ Route::middleware(['auth', 'isOwner'])->group(function () {
     ]);
 });
 
+// Auth routes (login, register, password reset, etc.)
 require __DIR__.'/auth.php';
