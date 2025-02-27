@@ -12,15 +12,14 @@ class Listing extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'user_id',
-        'location',
-        'price',
-        'amenities',
-        'role',
-        'available_from',
-        'available_to',
-    ];
+protected $fillable = [
+    'user_id',
+    'location',
+    'price',
+    'amenities',
+    'available_from',
+    'available_to',
+];
 
     /**
      * Get the user that owns the listing.
