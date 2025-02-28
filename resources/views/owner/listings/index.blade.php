@@ -1,45 +1,35 @@
 @extends('layouts.app')
 
-@section('title', 'My Listings')
-
 @section('content')
-<div class="bg-white shadow overflow-hidden sm:rounded-lg">
-    <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
-        <div>
-            <h3 class="text-lg leading-6 font-medium text-gray-900">My Listings</h3>
-            <p class="mt-1 max-w-2xl text-sm text-gray-500">Properties you've listed for rent</p>
-        </div>
-        <a href="{{ route('owner.listings.create') }}"
-           class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md
-                  font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700
-                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
-            Create New
-        </a>
+<div class="bg-gray-50 min-h-screen">
+  <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">My Listings</h2>
+      <a href="{{ route('owner.listings.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        Create Listing
+      </a>
     </div>
 
-    <!-- Listing Cards Grid -->
-    <div class="border-t border-gray-200">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-            @foreach($listings as $listing)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-48 bg-gray-200"></div>
-                    <div class="p-4">
-                        <h4 class="font-semibold text-lg">{{ $listing->location }}</h4>
-                        <p class="text-gray-600 mt-2">${{ $listing->price }}/night</p>
-                        <div class="mt-4 flex justify-between items-center">
-                            <a href="{{ route('owner.listings.show', $listing) }}"
-                               class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                                View Details
-                            </a>
-                            <span class="text-sm text-gray-500">
-                                {{ $listing->available_from->format('M d, Y') }} -
-                                {{ $listing->available_to->format('M d, Y') }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @foreach ($listings as $listing)
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+          <div class="h-48 bg-gray-200"></div>
+          <div class="p-4">
+            <h3 class="text-lg font-medium text-gray-900">{{ $listing->location }}</h3>
+            <p class="text-sm text-gray-500 mt-1">{{ $listing->amenities }}</p>
+            <p class="text-blue-500 font-bold mt-2">${{ $listing->price }}/night</p>
+            <div class="mt-4 flex justify-between">
+              <a href="{{ route('owner.listings.show', $listing) }}" class="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                View Details
+              </a>
+              <a href="{{ route('owner.listings.edit', $listing) }}" class="inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Edit
+              </a>
+            </div>
+          </div>
         </div>
+      @endforeach
     </div>
+  </div>
 </div>
 @endsection

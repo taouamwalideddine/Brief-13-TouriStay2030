@@ -13,8 +13,9 @@ class OwnerController extends Controller
     public function index()
     {
 
-        $listings = Auth::user()->listings;
-        return view('owner.listings.index', compact('listings'));
+    // Get listings owned by the authenticated user
+    $listings = Auth::user()->listings;
+    return view('owner.listings.index', compact('listings'));
     }
 
 
@@ -57,7 +58,6 @@ class OwnerController extends Controller
         if ($listing->user_id !== Auth::id()) {
             return redirect()->route('owner.listings.index')->with('error', 'You do not have access to this listing.');
         }
-
         return view('owner.listings.show', compact('listing'));
     }
 
