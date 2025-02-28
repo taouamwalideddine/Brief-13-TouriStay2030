@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ListingController;
 use App\Http\Controllers\OwnerController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TouristController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +29,18 @@ Route::middleware(['auth', 'isOwner'])->group(function () {
         'update' => 'owner.listings.update',
         'destroy' => 'owner.listings.destroy',
     ]);
+});
+
+
+
+
+// Tourist routes (protected by 'auth' and 'isTourist' middleware)
+Route::middleware(['auth', 'isTourist'])->group(function () {
+    // Route to list all listings (index page)
+    Route::get('tourist/listings', [TouristController::class, 'index'])->name('tourist.listings.index');
+
+    // Route to show a single listing
+    Route::get('tourist/listings/{listing}', [TouristController::class, 'show'])->name('tourist.listings.show');
 });
 
 require __DIR__.'/auth.php';

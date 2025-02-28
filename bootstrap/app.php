@@ -28,6 +28,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'isTourist',
         ]);
     })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'isTourist' => \App\Http\Middleware\IsTourist::class,
+        ]);
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

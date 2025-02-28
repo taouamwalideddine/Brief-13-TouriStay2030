@@ -16,17 +16,17 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
-                    @auth
-                        @if(Auth::user()->role === 'owner')
-                            <a href="{{ route('owner.listings.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">My Listings</a>
-                            <a href="{{ route('owner.listings.create') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Create Listing</a>
-                        @else
-                            <a href="{{ route('tourist.listings.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Browse Listings</a>
-                            <a href="{{ route('tourist.favorites.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Favorites</a>
-                        @endif
-                    @endauth
-                </div>
+<!-- Navigation Links -->
+<div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+    @auth
+        @if(Auth::user()->role === 'owner')
+            <a href="{{ route('owner.listings.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">My Listings</a>
+            <a href="{{ route('owner.listings.create') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Create Listing</a>
+        @else
+            <a href="{{ route('tourist.listings.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium">Browse Listings</a>
+        @endif
+    @endauth
+</div>
 
                 <!-- Profile Dropdown -->
                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
