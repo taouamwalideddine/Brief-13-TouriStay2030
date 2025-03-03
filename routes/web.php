@@ -40,7 +40,7 @@ Route::middleware(['auth', 'isTourist'])->group(function () {
     Route::get('tourist/listings', [TouristController::class, 'index'])->name('tourist.listings.index');
 
     // Route to show a single listing
-    Route::get('tourist/listings/{listing}', [TouristController::class, 'show'])->name('tourist.listings.show');
+    Route::get('tourist/listings/{listing?}', [TouristController::class, 'show'])->name('tourist.listings.show');
 });
 
 require __DIR__.'/auth.php';

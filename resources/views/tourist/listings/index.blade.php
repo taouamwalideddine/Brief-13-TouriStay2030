@@ -18,9 +18,9 @@
             <p class="text-sm text-gray-500 mt-1">{{ $listing->amenities }}</p>
             <p class="text-blue-500 font-bold mt-2">${{ $listing->price }}/night</p>
             <div class="mt-4">
-              <a href="{{ route('tourist.listings.show', $listing) }}" class="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                View Details
-              </a>
+            <a href="{{ route('tourist.listings.show', $listing->id) }}" class="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              View Details
+            </a>
             </div>
           </div>
         </div>

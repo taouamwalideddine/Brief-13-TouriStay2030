@@ -17,9 +17,7 @@ class TouristController extends Controller
     return view('tourist.listings.index', compact('listings'));
 }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
