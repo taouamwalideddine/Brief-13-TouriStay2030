@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OwnerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TouristController;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Owner routes (protected by 'auth' and 'isOwner' middleware)
 Route::middleware(['auth', 'isOwner'])->group(function () {
     Route::resource('owner/listings', OwnerController::class)->names([
         'index' => 'owner.listings.index',
@@ -41,6 +43,13 @@ Route::middleware(['auth', 'isTourist'])->group(function () {
 
     // Route to show a single listing
     Route::get('tourist/listings/{listing?}', [TouristController::class, 'show'])->name('tourist.listings.show');
+
+        // Reservation routes
+        Route::get('tourist/listings/{listing}/reserve', [ReservationController::class, 'create'])->name('tourist.reservations.create');
+        Route::post('tourist/reservations', [ReservationController::class, 'store'])->name('tourist.reservations.store');
+        Route::get('tourist/reservations', [ReservationController::class, 'index'])->name('tourist.reservations.index');
+        Route::get('tourist/reservations/{reservation}', [ReservationController::class, 'show'])->name('tourist.reservations.show');
+        Route::delete('tourist/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('tourist.reservations.destroy');
 });
 
 require __DIR__.'/auth.php';
