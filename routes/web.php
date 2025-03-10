@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Owner routes (protected by 'auth' and 'isOwner' middleware)
-Route::middleware(['auth', 'isOwner'])->group(function () {
+Route::middleware(['isOwner'])->group(function () {
     Route::resource('owner/listings', OwnerController::class)->names([
         'index' => 'owner.listings.index',
         'create' => 'owner.listings.create',
@@ -35,21 +35,17 @@ Route::middleware(['auth', 'isOwner'])->group(function () {
 
 
 
-
 // Tourist routes (protected by 'auth' and 'isTourist' middleware)
 Route::middleware(['auth', 'isTourist'])->group(function () {
-    // Route to list all listings (index page)
+
     Route::get('tourist/listings', [TouristController::class, 'index'])->name('tourist.listings.index');
-
-    // Route to show a single listing
     Route::get('tourist/listings/{listing?}', [TouristController::class, 'show'])->name('tourist.listings.show');
+    Route::get('tourist/listings/{listing}/reserve', [ReservationController::class, 'create'])->name('tourist.reservations.create');
+    Route::post('tourist/reservations', [ReservationController::class, 'store'])->name('tourist.reservations.store');
+    Route::get('tourist/reservations', [ReservationController::class, 'index'])->name('tourist.reservations.index');
+    Route::get('tourist/reservations/{reservation}', [ReservationController::class, 'show'])->name('tourist.reservations.show');
+    Route::delete('tourist/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('tourist.reservations.destroy');
 
-        // Reservation routes
-        Route::get('tourist/listings/{listing}/reserve', [ReservationController::class, 'create'])->name('tourist.reservations.create');
-        Route::post('tourist/reservations', [ReservationController::class, 'store'])->name('tourist.reservations.store');
-        Route::get('tourist/reservations', [ReservationController::class, 'index'])->name('tourist.reservations.index');
-        Route::get('tourist/reservations/{reservation}', [ReservationController::class, 'show'])->name('tourist.reservations.show');
-        Route::delete('tourist/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('tourist.reservations.destroy');
 });
 
 require __DIR__.'/auth.php';

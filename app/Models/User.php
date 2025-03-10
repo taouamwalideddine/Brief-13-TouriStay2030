@@ -20,7 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // Add this line
+        'role', 
     ];
 
     /**
@@ -46,9 +46,7 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get the listings owned by the user.
-     */
+
     public function listings(): HasMany
     {
         return $this->hasMany(Listing::class);

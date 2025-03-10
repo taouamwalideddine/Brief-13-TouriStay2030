@@ -12,7 +12,6 @@ class TouristController extends Controller
      */
     public function index()
 {
-    // Get all listings (or filter based on search/filters)
     $listings = Listing::all();
     return view('tourist.listings.index', compact('listings'));
 }
@@ -23,41 +22,29 @@ class TouristController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Listing $listing)
     {
         return view('tourist.listings.show', compact('listing'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         //

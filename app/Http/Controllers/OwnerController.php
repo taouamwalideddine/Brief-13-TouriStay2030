@@ -13,7 +13,6 @@ class OwnerController extends Controller
     public function index()
     {
 
-    // Get listings owned by the authenticated user
     $listings = Auth::user()->listings;
     return view('owner.listings.index', compact('listings'));
     }
@@ -27,7 +26,6 @@ class OwnerController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request
         $request->validate([
             'location' => 'required|string',
             'price' => 'required|numeric',
@@ -36,10 +34,8 @@ class OwnerController extends Controller
             'available_to' => 'required|date',
         ]);
 
-        // Get the authenticated user's ID
         $user_id = Auth::id();
 
-        // Create the listing with the validated data and user_id
         Listing::create([
             'user_id' => $user_id,
             'location' => $request->location,
@@ -104,7 +100,6 @@ class OwnerController extends Controller
             return redirect()->route('owner.listings.index')->with('error', 'You do not have access to this listing.');
         }
 
-        // Delete the listing
         $listing->delete();
 
         return redirect()->route('owner.listings.index')->with('success', 'Listing deleted successfully.');

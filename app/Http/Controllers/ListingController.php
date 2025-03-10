@@ -42,10 +42,8 @@ class ListingController extends Controller
             'available_to' => 'required|date',
         ]);
 
-        // Get the authenticated user's ID
         $user_id = Auth::id();
 
-        // Create the listing with the validated data and user_id
         Listing::create([
             'user_id' => $user_id,
             'location' => $request->location,
